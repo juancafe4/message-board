@@ -1,0 +1,27 @@
+[
+  {
+    "id": "2b9268c0-5ab3-11e6-a5f8-f35ea5a4388d",
+    "user": "user1",
+    "password": "secret"
+  },
+  {
+    "id": "4807b7d0-5ab3-11e6-a5f8-f35ea5a4388d",
+    "user": "user1",
+    "password": "secret"
+  },
+  {
+    "id": "6215f1f0-5ab3-11e6-a5f8-f35ea5a4388d",
+    "user": "user1",
+    "password": "secret"
+  },
+  {
+    "id": "75797a00-5ab3-11e6-a5f8-f35ea5a4388d",
+    "user": "user1",
+    "password": "secret"
+  },
+  {
+    "id": "'8a4ee190-5ab3-11e6-a5f8-f35ea5a4388d'",
+    "user": "user1",
+    "password": "secret"
+  }
+]

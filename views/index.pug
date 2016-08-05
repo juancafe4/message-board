@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+html(lang="en")
+head
+  meta(charset="UTF-8")
+  title=title
+  script(src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous")
+  link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css")
+  script(src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js")
+  
+  script(src="main.js")
+  link(rel="stylesheet", href="style.css")
+body
+  .container.loginArea
+    .row
+      form.col.s12.login.center
+        h3 Please Login to see the messages
+        .row
+          .input-field.col.s12(required='')
+            input#username.validate(type='text')
+            label(for='text') Username
+        .row
+          .input-field.col.s12(required='')
+            input#pass.validate(type='password')
+            label(for='pass') Password
+        .row
+          button.waves-effect.waves-light.btn.blue.lighten-3.loginButton(type="button ") Log In
+  .container.center#messageArea
+    h3.userName User Name
+    .row
+      form.col.s12
+        .row
+          .input-field.col.s12
+            textarea#textarea1.materialize-textarea
+            label(for='textarea1') Textarea
+            button(type="submit").sendMessage.waves-effect.waves-light.btn.blue.lighten-3 Send Message
+    table.highlight
+      thead
+        tr
+          th Time
+          th Message 
+      tbody
+
+
+
+  
