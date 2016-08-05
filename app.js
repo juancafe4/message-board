@@ -42,7 +42,7 @@ app.route('/messages')
   });
 })
   .post((req, res) => {
-    messages.create(req.params, (err, message) => {
+    messages.create(req.body, (err, message) => {
       res.status(err ? 400 : 200).send(err || message)
     });
   });
