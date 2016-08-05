@@ -32,14 +32,18 @@ body
           .input-field.col.s12
             textarea#textarea1.materialize-textarea
             label(for='textarea1') Textarea
-            button(type="submit").sendMessage.waves-effect.waves-light.btn.blue.lighten-3 Send Message
+            button(type="button")#sendMessage.waves-effect.waves-light.btn.blue.lighten-3 Send Message
     table.highlight
       thead
         tr
           th Time
           th Message 
-      tbody
+      tbody#messageList
+        tr#template
+          td.time
+          td.message
 
+  
 
 
   

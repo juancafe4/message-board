@@ -38,7 +38,7 @@ exports.create = function (data, cb) {
     messages.push(data)
     fs.writeFile(dataFilePath, JSON.stringify(messages), err => {
       if (err) return cb(err);
-      else cb(null, messages)
+      else cb(null, data)
     });
   })
 }
