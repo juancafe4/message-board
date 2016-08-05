@@ -6,7 +6,16 @@ const moment = require('moment')
 
 
 
-exports.remove = 
+exports.remove = function(messageId, cb) {
+  exports.getAll((err, messages) => {
+    if(err) return cb(err)
+    messages = messages.filter(message => message.id !== messageId)
+    fs.writeFile(dataFilePath, JSON.stringify(messages), err => {
+      cb(err);
+    });
+  })
+}
+
 exports.getAll = cb => {
   // 1. read the json file tp ge the data
   // 2. parse the data, to get the array
@@ -46,3 +55,23 @@ exports.create = function (data, cb) {
   })
 }
 
+
+exports.update  = function(id, updateObj, cb) {
+  this.getAll((err, messages) => {
+    //filtering stuff and updating
+    if (err) return cb(err);
+    let message = messages.filter(val => val.id === id)[0]
+    if(!message) return cb({err: "Cat not found."})
+
+    let index = messages.indexOf(message);
+    for (let key in message) {
+      message[key] = updateObj[key] || message[key];
+    }
+    message.time = moment().format("YYYY-MM-DD HH:mm");
+    messages[index] = message
+    fs.writeFile(dataFilePath, JSON.stringify(messages), err => {
+      if (err) return cb(err);
+      cb(null, message)
+    });
+  });
+}

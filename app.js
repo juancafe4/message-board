@@ -46,3 +46,17 @@ app.route('/messages')
       res.status(err ? 400 : 200).send(err || message)
     });
   });
+
+app.route('/messages/:id')
+  .delete((req, res) => {
+    //DELETING Message ID
+    messages.remove(req.params.id, err => {
+      res.status(err ? 400 : 200). send(err);
+    });
+  })
+  .put((req, res) => {
+    //UPDATING Message ID
+    messages.update(req.params.id, req.body, (err, message) => {
+      res.status(err ? 400 : 200). send(err || message);
+    });
+  })

@@ -3,12 +3,15 @@ $(() => {
   $(".loginArea").on('click', 'button', login);
 
   $('#sendMessage').click(sendMessage);
+
+  $('#messageList').on('click', '.delete', deleteMessage)
 });
 
 function login(event) {
   event.preventDefault()
   console.log("Click")
 
+  //Getting all the users
   $.get('/users').done(data => {
     let user = $('#username').val();
     let password = $('#pass').val();
@@ -39,7 +42,8 @@ function login(event) {
           $tr.find('.message').text(val.message)
           $tr.data('id', val.id);
           $tr.data('userId', val.userId)
-
+          console.log('Getting...id ', $tr.data('id'))
+          console.log('Getting...user id ', $tr.data('userId'))
           return $tr;
         })
         $('#messageList').append($trs)
@@ -77,3 +81,27 @@ function sendMessage(event) {
  } else alert('Message blank!')
 }
 
+function deleteMessage(e) {
+  console.log("Delete me bitch")
+  let messageId = $(this).closest('tr').data('id')
+  let userId = $(this).closest('tr').data('userId')
+
+  console.log('messageId ', messageId)
+  console.log('user id ', userId)
+  console.log('h3 id', $('.userName').data('userId'))
+  if ($('.userName').data('userId') === userId) {
+    console.log('We can delete')
+  } else alert("You are authorized to delete this message")
+  $.ajax(`/messages/${userId}`,  {
+    method: 'DELETE',
+  })
+  .done( () => {
+    console.log('Delete success!')
+    $(this).closest('tr').remove()
+    
+    //Update
+  })
+  .fail(err => {
+    console.log('Delete fail! ', err)
+  });
+}
