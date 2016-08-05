@@ -4,6 +4,7 @@ head
   meta(charset="UTF-8")
   title=title
   script(src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous")
+  link(href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet")
   link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css")
   script(src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js")
   
@@ -42,6 +43,12 @@ body
         tr#template
           td.time
           td.message
+          td.edit
+            button.waves-effect.waves-light.btn.blue.lighten-3.loginButton(type="button ") 
+              i.material-icons mode_edit
+          td.delete
+            button.waves-effect.waves-light.btn.blue.lighten-3.loginButton(type="button ") 
+              i.material-icons delete
 
   
 

@@ -4,6 +4,9 @@ const uuid = require('uuid')
 const dataFilePath = path.join(__dirname, '../data//messages.json');
 const moment = require('moment')
 
+
+
+exports.remove = 
 exports.getAll = cb => {
   // 1. read the json file tp ge the data
   // 2. parse the data, to get the array
@@ -42,3 +45,4 @@ exports.create = function (data, cb) {
     });
   })
 }
+
