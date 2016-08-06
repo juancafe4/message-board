@@ -7,6 +7,7 @@ $(() => {
 
   $('#messageList').on('click', '.delete', deleteMessage)
   $('#messageList').on('click', '.edit', editMessage)
+  $('#newMessage').click(newMessage)
 });
 
 function login(event) {
@@ -88,13 +89,9 @@ function sendMessage(event) {
 }
 
 function deleteMessage(e) {
-  console.log("Delete me bitch")
   let messageId = $(this).closest('tr').data('id')
   let userId = $(this).closest('tr').data('userId')
 
-  console.log('messageId ', messageId)
-  console.log('user id ', userId)
-  console.log('h3 id', $('.userName').data('userId'))
   if ($('.userName').data('userId') == userId) {
     console.log('We can delete')
     console.log(`/messages/${userId}`)
@@ -104,18 +101,27 @@ function deleteMessage(e) {
     .done( () => {
       console.log('Delete success!')
       $(this).closest('tr').remove()
-        
-      //Update
     })
     .fail(err => {
-      console.log('Delete fail! ', err)
+      console.log('Delete fail!')
     });
   } else alert("You are not authorized to delete this message")
 }
 
 function editMessage(e) {
-   $('#modal1').openModal();
-   let userId = $(this).closest('tr').data('userId')
+  let userId = $(this).closest('tr').data('userId')
 
-   if ()
+  if ($('.userName').data('userId') == userId) {
+    $('#modal1').openModal();
+  } else {
+    alert("You are not authorized to delete this message")
+  }
+}
+
+function newMessage(event) {
+  let newMessage = $('#textarea2').val();
+
+  if (newMessage) {
+    
+  } else alert("New message is empty!")
 }
