@@ -51,12 +51,12 @@ app.route('/messages/:id')
   .delete((req, res) => {
     //DELETING Message ID
     messages.remove(req.params.id, err => {
-      res.status(err ? 400 : 200). send(err);
+      res.status(err ? 400 : 200). send(err ||  "success!");
     });
   })
   .put((req, res) => {
     //UPDATING Message ID
-    messages.update(req.params.id, req.body, (err, message) => {
+    messages.update(req.params.id, req.body.newMessage, (err, message) => {
       res.status(err ? 400 : 200). send(err || message);
     });
   })

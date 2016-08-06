@@ -21,13 +21,13 @@ function login(event) {
     let userId
     console.log('getting data... ', data)
     let correct = data.some(val => {
-        if (val.username === user && val.password === password) {
-          userId = val.id
-          return true;
-        }
-        return false;
+      if (val.username === user && val.password === password) {
+        userId = val.id
+        return true;
+      }
+      return false;
     });
-     if (correct) {
+    if (correct) {
       $('.loginArea').addClass('hide')
       // let  $messageArea = $('#messageArea').clone()
       // $messageArea.css('display', 'initial')
@@ -55,10 +55,10 @@ function login(event) {
       }).fail(err => {
         console.log('Error getting messages')
       });
-     } else
-      alert('Wrong username or password. Try again!')
-     
-    }).fail( err => {
+    } else
+    alert('Wrong username or password. Try again!')
+
+  }).fail( err => {
     console.log('Error getting users\n')
   });
 }
@@ -70,22 +70,22 @@ function sendMessage(event) {
   let userId= $('.userName').data('userId')
   let obj ={userId: userId, message: content , 
     userName: $('.userName').text()}
-  $.post( "/messages", obj)
-  .done(function(data) {
-    console.log('Success posting ', data)
-    let $tr = $('#template').clone()
-    $tr.removeAttr('id');
-    $tr.find('.time').text(data.time)
-    $tr.find('.message').text(data.message)
-    $tr.find('.userNameTable').text(data.userName)
-    $tr.data('id', data.id);
-    $tr.data('userId', data.userId)
-    $('#messageList').append($tr)
-    $('#textarea1').val('')
-  }).fail(err => {
-    console.log('Error posting')
-  });
- } else alert('Message blank!')
+    $.post( "/messages", obj)
+    .done(function(data) {
+      console.log('Success posting ', data)
+      let $tr = $('#template').clone()
+      $tr.removeAttr('id');
+      $tr.find('.time').text(data.time)
+      $tr.find('.message').text(data.message)
+      $tr.find('.userNameTable').text(data.userName)
+      $tr.data('id', data.id);
+      $tr.data('userId', data.userId)
+      $('#messageList').append($tr)
+      $('#textarea1').val('')
+    }).fail(err => {
+      console.log('Error posting')
+    });
+  } else alert('Message blank!')
 }
 
 function deleteMessage(e) {
@@ -108,9 +108,11 @@ function deleteMessage(e) {
 
 function editMessage(e) {
   let userId = $(this).closest('tr').data('userId')
-
+  
   if ($('.userName').data('userId') == userId) {
     $('#modal1').openModal();
+    $('#newMessage').data('id', $(this).closest('tr').data('id'))
+    
   } else {
     alert("You are not authorized to delete this message")
   }
@@ -118,17 +120,44 @@ function editMessage(e) {
 
 function newMessage(event) {
   let newMessage = $('#textarea2').val();
+  let id = $('#newMessage').data('id')
 
   if (newMessage) {
-    $.ajax(`/messages/${messageId}`,  {
-      method: 'UPDATE',
+    console.log('Comming!')
+    $.ajax(`/messages/${id}`,  {
+      method: 'PUT',
+      data: {newMessage: newMessage},
     })
     .done( () => {
-      console.log('Delete success!')
-      $(this).closest('tr').remove()
+      console.log('Updating success!')
+      render()
     })
     .fail(err => {
-      console.log('Delete fail!')
+      console.log('Updating fail!')
     });
   } else alert("New message is empty!")
+}
+
+function render() {
+  $.get('/messages')
+  .done(data => {
+    console.log('data ', data)
+    let $trs = data.map(val => {
+      console.log('values render ', val)
+      let $tr = $('#template').clone()
+      $tr.removeAttr('id');
+      $tr.find('.time').text(val.time)
+      $tr.find('.message').text(val.message)
+      $tr.find('.userNameTable').text(val.userName)
+      $tr.data('id', val.id);
+      $tr.data('userId', val.userId)
+      console.log('Getting...id ', $tr.data('id'))
+      console.log('Getting...user id ', $tr.data('userId'))
+      return $tr;
+    })
+    $('#messageList').empty().append($trs)
+    $('#modal1').closeModal();
+  }).fail(err => {
+    console.log('Error getting messages')
+  });
 }
