@@ -1,10 +1,12 @@
 $(() => {
   console.log('Ready!');
+  $('.modal-trigger').leanModal();
   $(".loginArea").on('click', 'button', login);
 
   $('#sendMessage').click(sendMessage);
 
   $('#messageList').on('click', '.delete', deleteMessage)
+  $('#messageList').on('click', '.edit', editMessage)
 });
 
 function login(event) {
@@ -104,4 +106,9 @@ function deleteMessage(e) {
   .fail(err => {
     console.log('Delete fail! ', err)
   });
+}
+
+function editMessage(e) {
+   $('#modal1').openModal();
+
 }

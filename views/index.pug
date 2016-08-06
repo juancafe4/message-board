@@ -32,7 +32,7 @@ body
         .row
           .input-field.col.s12
             textarea#textarea1.materialize-textarea
-            label(for='textarea1') Textarea
+            label(for='textarea1') Message
             button(type="button")#sendMessage.waves-effect.waves-light.btn.blue.lighten-3 Send Message
     table.highlight
       thead
@@ -49,6 +49,16 @@ body
           td
             button.delete.waves-effect.waves-light.btn.blue.lighten-3.loginButton(type="button ") 
               i.material-icons delete
+
+.container
+  #modal.modal
+    .modal-content
+      h4 New Message
+      textarea#textarea2.materialize-textarea
+      label(for='textarea2') New Message
+    .modal-footer
+      button(type="button")#newMessage.waves-effect.waves-light.btn.blue.lighten-3 New Message
+      a.modal-action.modal-close.waves-effect.waves-green.btn-flat(href='#!') Cancel
 
   
 
