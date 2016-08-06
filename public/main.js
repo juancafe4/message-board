@@ -93,8 +93,6 @@ function deleteMessage(e) {
   let userId = $(this).closest('tr').data('userId')
 
   if ($('.userName').data('userId') == userId) {
-    console.log('We can delete')
-    console.log(`/messages/${userId}`)
     $.ajax(`/messages/${messageId}`,  {
       method: 'DELETE',
     })
@@ -122,6 +120,15 @@ function newMessage(event) {
   let newMessage = $('#textarea2').val();
 
   if (newMessage) {
-    
+    $.ajax(`/messages/${messageId}`,  {
+      method: 'UPDATE',
+    })
+    .done( () => {
+      console.log('Delete success!')
+      $(this).closest('tr').remove()
+    })
+    .fail(err => {
+      console.log('Delete fail!')
+    });
   } else alert("New message is empty!")
 }
