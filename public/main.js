@@ -115,5 +115,7 @@ function deleteMessage(e) {
 
 function editMessage(e) {
    $('#modal1').openModal();
+   let userId = $(this).closest('tr').data('userId')
 
+   if ()
 }
