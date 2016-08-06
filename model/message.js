@@ -7,7 +7,8 @@ const connection = require('../config/db')
 
 
 exports.remove = function(messageId, cb) {
-  connection.query('select * from messages', (err, messages) => {
+  connection.query(`delete from messages where id = "${messageId}"`, (err, messages) => {
+    console.log(err || messageId)
     cb(err, messages)
   });
   // exports.getAll((err, messages) => {

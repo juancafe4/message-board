@@ -95,21 +95,22 @@ function deleteMessage(e) {
   console.log('messageId ', messageId)
   console.log('user id ', userId)
   console.log('h3 id', $('.userName').data('userId'))
-  if ($('.userName').data('userId') === userId) {
+  if ($('.userName').data('userId') == userId) {
     console.log('We can delete')
-  } else alert("You are authorized to delete this message")
-  $.ajax(`/messages/${userId}`,  {
-    method: 'DELETE',
-  })
-  .done( () => {
-    console.log('Delete success!')
-    $(this).closest('tr').remove()
-    
-    //Update
-  })
-  .fail(err => {
-    console.log('Delete fail! ', err)
-  });
+    console.log(`/messages/${userId}`)
+    $.ajax(`/messages/${messageId}`,  {
+      method: 'DELETE',
+    })
+    .done( () => {
+      console.log('Delete success!')
+      $(this).closest('tr').remove()
+        
+      //Update
+    })
+    .fail(err => {
+      console.log('Delete fail! ', err)
+    });
+  } else alert("You are not authorized to delete this message")
 }
 
 function editMessage(e) {
