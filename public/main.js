@@ -112,7 +112,7 @@ function editMessage(e) {
   if ($('.userName').data('userId') == userId) {
     $('#modal1').openModal();
     $('#newMessage').data('id', $(this).closest('tr').data('id'))
-    
+    $('#newMessage').data('index', $(this).closest('tr').index())
   } else {
     alert("You are not authorized to delete this message")
   }
@@ -124,40 +124,25 @@ function newMessage(event) {
 
   if (newMessage) {
     console.log('Comming!')
+    let index = $('#newMessage').data('index')
     $.ajax(`/messages/${id}`,  {
       method: 'PUT',
       data: {newMessage: newMessage},
     })
-    .done( () => {
-      console.log('Updating success!')
-      render()
+    .done((data) => {
+      let $tr = $('#messageList').children()[index]
+      console.log('Updating success!');
+      $($tr).find('.time').text(data.time);
+      $($tr).find('.message').text(data.message);
+      $('#modal1').closeModal();
     })
     .fail(err => {
       console.log('Updating fail!')
+      $('#modal1').closeModal();
+
     });
+
   } else alert("New message is empty!")
 }
 
-function render() {
-  $.get('/messages')
-  .done(data => {
-    console.log('data ', data)
-    let $trs = data.map(val => {
-      console.log('values render ', val)
-      let $tr = $('#template').clone()
-      $tr.removeAttr('id');
-      $tr.find('.time').text(val.time)
-      $tr.find('.message').text(val.message)
-      $tr.find('.userNameTable').text(val.userName)
-      $tr.data('id', val.id);
-      $tr.data('userId', val.userId)
-      console.log('Getting...id ', $tr.data('id'))
-      console.log('Getting...user id ', $tr.data('userId'))
-      return $tr;
-    })
-    $('#messageList').empty().append($trs)
-    $('#modal1').closeModal();
-  }).fail(err => {
-    console.log('Error getting messages')
-  });
-}
+

@@ -77,7 +77,7 @@ exports.update  = function(id, message, cb) {
 
   connection.query(`update messages set message = "${message}", time= "${time}" where id = "${id}"`, (err, newMessage) => {
     console.log(err || message)
-    cb(err , message);
+    cb(err , {message: message, time: time});
   });
   // this.getAll((err, messages) => {
   //   //filtering stuff and updating
