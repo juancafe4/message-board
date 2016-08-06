@@ -36,17 +36,19 @@ body
             button(type="button")#sendMessage.waves-effect.waves-light.btn.blue.lighten-3 Send Message
     table.highlight
       thead
-        tr
-          th Time
-          th Message 
+        tr.row
+          th.col.s2 Time
+          th.col.s6 Message
+          th.col.s2 User Name
       tbody#messageList
-        tr#template
-          td.time
-          td.message
-          td
+        tr#template.row
+          td.time.col.s2
+          td.message.col.s6
+          td.userNameTable.col.s2
+          td.col.s1
             button.edit.waves-effect.waves-light.btn.blue.lighten-3.loginButton(type="button ") 
               i.material-icons mode_edit
-          td
+          td.col.s1
             button.delete.waves-effect.waves-light.btn.blue.lighten-3.loginButton(type="button ") 
               i.material-icons delete
 

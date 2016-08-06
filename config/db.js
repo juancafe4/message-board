@@ -1,12 +1,10 @@
 const mysql = require('mysql');
 
-const connection = mysql.createConnection("mysql://ot0iftg11w3xcz4a:vjuxwlijm7tcpjwa@gx97kbnhgjzh3efb.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/qqds7mdh7z3uj80l")
-
-// or {host: localhost // url of db
-// user: root}
-// password : process.env.MYSQL_PASSWORD
-// db: 'testdb'
-
+const connection = mysql.createConnection({
+  host: 'localhost', 
+  user: 'root',
+  password: 'admin',
+  database: 'testdb' })
 connection.connect();
 
 // connection.query(`create table city values (

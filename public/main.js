@@ -18,8 +18,9 @@ function login(event) {
     let user = $('#username').val();
     let password = $('#pass').val();
     let userId
+    console.log('getting data... ', data)
     let correct = data.some(val => {
-        if (val.user === user && val.password === password) {
+        if (val.username === user && val.password === password) {
           userId = val.id
           return true;
         }
@@ -42,6 +43,7 @@ function login(event) {
           $tr.removeAttr('id');
           $tr.find('.time').text(val.time)
           $tr.find('.message').text(val.message)
+          $tr.find('.userNameTable').text(val.userName)
           $tr.data('id', val.id);
           $tr.data('userId', val.userId)
           console.log('Getting...id ', $tr.data('id'))
@@ -65,7 +67,8 @@ function sendMessage(event) {
 
  if (content) {
   let userId= $('.userName').data('userId')
-  let obj ={userId: userId, message: content}
+  let obj ={userId: userId, message: content , 
+    userName: $('.userName').text()}
   $.post( "/messages", obj)
   .done(function(data) {
     console.log('Success posting ', data)
@@ -73,6 +76,7 @@ function sendMessage(event) {
     $tr.removeAttr('id');
     $tr.find('.time').text(data.time)
     $tr.find('.message').text(data.message)
+    $tr.find('.userNameTable').text(data.userName)
     $tr.data('id', data.id);
     $tr.data('userId', data.userId)
     $('#messageList').append($tr)
